@@ -1,10 +1,8 @@
 package com.agendamentotransferencia.domain.transfer;
 
+import com.agendamentotransferencia.dtos.TransferDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class Transfer {
     @Id
@@ -24,4 +23,12 @@ public class Transfer {
     private BigDecimal valorTransferencia;
     private LocalDateTime dataAgendamento;
     private LocalDateTime dataTransferencia;
+
+    public Transfer(TransferDTO data) {
+        this.contaDestino = data.contaDestino();
+        this.contaOrigem = data.contaOrigem();
+        this.valorTransferencia = data.valorTransferencia();
+        this.dataAgendamento = data.dataAgendamento();
+        this.dataTransferencia = data.dataTransferencia();
+    }
 }
